@@ -34,7 +34,7 @@ void Usage(char *prog)
 		"  %s [-v] [-c <gpuid>] -i <vsrc> -d <dsrc> -o <vout> -s <vsc> -k <dsc> -n <nit>\n\n"
 		pad	"<vsrc>  - source volume (ex: stack_1.512x512x768.raw).\n"
 		pad	"<dsrc>  - distortion function volume (ex: psf.64x64x64.raw).\n"
-		pad	"<vout>  - base name of result volume (dimensions & extension will be added automatically).\n"
+		pad	"<vout>  - base name of result volume (dims & ext will be added).\n"
 		pad	"<vsc>   - volume stop condition (default: 0.075).\n"
 		pad	"<dsc>   - distortion function stop condition (default: 0.05).\n"
 		pad	"<nit>   - number of iterations (default: 100).\n\n", prog);

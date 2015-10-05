@@ -35,7 +35,7 @@ void Init(int n, char **params)
 void SaveResult(const Dim &dim)
 {
 	timer::Start();
-	printf("\n,--[ Done ]--------\n| Saving... "); fflush(stdout);
+	printf(" \n,--[ Done ]--------\n| Saving... "); fflush(stdout);
 
 	// Get back result buffer from computing memory to CPU memory
 	dtype *result = bdkf::GetFinalResult();
@@ -92,12 +92,15 @@ int main(int argc, char **argv)
 	// Create result buffer in Processor memory
 	bdkf::CreateResultBuffer();
 
+	const char *spinner = "|\b/\b-\b\\\b";
+	int nc = 0;
+
+	printf("\nZ = ");
 	// This for-loops block represents the
 	// adaptive spatial blind deconvolution
 	// strategy (block-by-block deconvolution)
-	int nc = 0;
 	for (int z = ofs.z; z < vdim.z; z += cbs.z) {
-		printf("\nZ=%d\n", z);
+		printf("%d ", z); fflush(stdout);
 		for (int y = ofs.y; y < vdim.y; y += cbs.y) {
 			for (int x = ofs.x; x < vdim.x; x += cbs.x) {
 				Pos cp(x, y, z);
@@ -122,7 +125,7 @@ int main(int argc, char **argv)
 							++nc,timer::Check(),ni,100*rvstop,100*rkstop);
 					if (nc % 4 == 0) printf("\n    ");
 				} else {
-					write(1, ".", 1);
+					write(1, &spinner[(nc % 4) << 1], 2);
 					++nc;
 				}
 				// Store deconvolution result from working buffer
